@@ -1,0 +1,32 @@
+{
+  "budgets": [
+    60,
+    120,
+    180,
+    240,
+    300,
+    1000
+  ],
+  "outer_folds": 5,
+  "outer_repeats": 1,
+  "random_state": 42,
+  "config": {
+    "patch_size": 16,
+    "d_model": 64,
+    "n_heads": 4,
+    "n_layers": 3,
+    "dim_feedforward": 128,
+    "dropout": 0.15,
+    "batch_size": 32,
+    "learning_rate": 0.001,
+    "weight_decay": 0.001,
+    "max_epochs": 80,
+    "patience": 18,
+    "validation_fraction": 0.15
+  },
+  "elapsed_seconds": 377.72518679199857,
+  "final_best_epoch": 39,
+  "final_validation_loss": 0.5665915608406067,
+  "parameter_count": 108803,
+  "device": "mps"
+}

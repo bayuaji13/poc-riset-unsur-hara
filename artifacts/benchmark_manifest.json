@@ -1,0 +1,44 @@
+{
+  "budgets": [
+    60,
+    120,
+    180,
+    240,
+    300,
+    1000
+  ],
+  "outer_folds": 5,
+  "outer_repeats": 2,
+  "inner_folds": 3,
+  "random_state": 42,
+  "elapsed_seconds": 52.57539087499026,
+  "targets": [
+    {
+      "code": "N",
+      "column": "n.tot_usda.a623_w.pct",
+      "label": "Nitrogen total",
+      "method": "USDA a623 (NCS/dry combustion)",
+      "unit": "% berat",
+      "transform": "log1p",
+      "color": "#168657"
+    },
+    {
+      "code": "P",
+      "column": "p.ext_usda.a274_mg.kg",
+      "label": "Fosfor tersedia",
+      "method": "USDA a274 (Olsen NaHCO3)",
+      "unit": "mg/kg",
+      "transform": "log1p",
+      "color": "#C06C00"
+    },
+    {
+      "code": "K",
+      "column": "k.ext_usda.a725_cmolc.kg",
+      "label": "Kalium dapat ditukar",
+      "method": "USDA a725 (NH4OAc pH 7)",
+      "unit": "cmolc/kg",
+      "transform": "log1p",
+      "color": "#6D48C7"
+    }
+  ]
+}

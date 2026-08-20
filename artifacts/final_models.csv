@@ -1,0 +1,4 @@
+target,model,preprocessing,inner_cv_rmse
+N,PLS (10 komponen),SG derivative,0.21421953030170796
+P,PLS (10 komponen),SG derivative,25.485958909541687
+K,PLS (10 komponen),SG derivative,1.2474136363348562

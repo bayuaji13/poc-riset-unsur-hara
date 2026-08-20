@@ -1,0 +1,3 @@
+sample_id,group_id,spectrum_path,N,N_unit,N_method,P,P_unit,P_method,K,K_unit,K_method
+GB-01,Grobogan,spectra/2-GB 1.txt,0.12,% berat,ISI METODE N,18.4,mg/kg,ISI METODE P,0.31,cmolc/kg,ISI METODE K
+

@@ -1,0 +1,16 @@
+family,target,fit_seconds,model_bytes,artifact
+PLS–RBF-SVR,N,0.10436537500936538,842269,zoo_svr_n.joblib
+PLS–RBF-SVR,P,0.0984082089853473,908581,zoo_svr_p.joblib
+PLS–RBF-SVR,K,0.12631645798683167,888269,zoo_svr_k.joblib
+PLS–Cubist,N,0.22408216699841432,944093,zoo_cubist_n.joblib
+PLS–Cubist,P,0.2159615829878021,921117,zoo_cubist_p.joblib
+PLS–Cubist,K,0.23497354198480025,971693,zoo_cubist_k.joblib
+PLS–Extra Trees,N,0.2400743749749381,12940393,zoo_extra_trees_n.joblib
+PLS–Extra Trees,P,0.23748508299468085,12949897,zoo_extra_trees_p.joblib
+PLS–Extra Trees,K,0.20276700000977144,12945721,zoo_extra_trees_k.joblib
+PCA–Gaussian Process,N,0.07750629200018011,8512376,zoo_gpr_n.joblib
+PCA–Gaussian Process,P,0.05856200002017431,8512376,zoo_gpr_p.joblib
+PCA–Gaussian Process,K,0.05925537500297651,8512376,zoo_gpr_k.joblib
+PLS–Cascade Forest,N,0.9866982499952428,11078210,zoo_cascade_forest_n.joblib
+PLS–Cascade Forest,P,1.0655870000191499,11050274,zoo_cascade_forest_p.joblib
+PLS–Cascade Forest,K,1.0202833749935962,11078354,zoo_cascade_forest_k.joblib

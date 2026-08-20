@@ -1,0 +1,28 @@
+{
+  "families": [
+    "PLS\u2013RBF-SVR",
+    "PLS\u2013Cubist",
+    "PLS\u2013Extra Trees",
+    "PCA\u2013Gaussian Process",
+    "PLS\u2013Cascade Forest",
+    "Tiny 1D CNN"
+  ],
+  "budgets": [
+    60,
+    120,
+    180,
+    240,
+    300,
+    1000
+  ],
+  "outer_folds": 5,
+  "outer_repeats": 1,
+  "random_state": 42,
+  "elapsed_seconds": 253.57673658401472,
+  "cnn_final": {
+    "best_epoch": 77,
+    "validation_loss": 0.464603191614151,
+    "parameter_count": 51619,
+    "device": "mps"
+  }
+}

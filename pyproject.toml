@@ -1,0 +1,45 @@
+[build-system]
+requires = ["setuptools>=75"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "poc-soilspectroscopy"
+version = "0.1.0"
+description = "Proof-of-concept prediksi NPK dari spektrum MIR OSSL"
+readme = "README.md"
+requires-python = ">=3.12,<3.13"
+dependencies = [
+  "cubist>=1.2,<2",
+  "joblib>=1.4,<2",
+  "matplotlib>=3.9,<4",
+  "numpy>=2,<3",
+  "pandas>=2.2,<4",
+  "plotly>=6,<7",
+  "scikit-learn>=1.6,<2",
+  "scipy>=1.14,<2",
+  "streamlit>=1.40,<2",
+  "torch>=2.8,<3",
+]
+
+[project.optional-dependencies]
+dev = [
+  "jupyterlab>=4.3,<5",
+  "nbformat>=5.10,<6",
+  "pytest>=8,<10",
+]
+
+[project.scripts]
+npk-prepare = "npk_spectra.data:main"
+npk-benchmark = "npk_spectra.benchmark:main"
+npk-attention = "npk_spectra.attention:main"
+npk-model-zoo = "npk_spectra.model_zoo:main"
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"
