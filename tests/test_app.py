@@ -28,6 +28,7 @@ def test_all_dashboard_pages_smoke():
         "Eksplorasi NPK",
         "Learning curve",
         "Prediksi & residual",
+        "Transfer Lokal",
         "Metodologi",
     ]
     for page in pages:

@@ -13,6 +13,7 @@ dependencies = [
   "joblib>=1.4,<2",
   "matplotlib>=3.9,<4",
   "numpy>=2,<3",
+  "openpyxl>=3.1,<4",
   "pandas>=2.2,<4",
   "plotly>=6,<7",
   "scikit-learn>=1.6,<2",
@@ -33,6 +34,7 @@ npk-prepare = "npk_spectra.data:main"
 npk-benchmark = "npk_spectra.benchmark:main"
 npk-attention = "npk_spectra.attention:main"
 npk-model-zoo = "npk_spectra.model_zoo:main"
+npk-transfer = "npk_spectra.transfer:main"
 
 [tool.setuptools]
 package-dir = {"" = "src"}

@@ -149,7 +149,7 @@ def extend_diversity_order(
 
 def prepare_dataset(project_root: Path, candidate_count: int = 2400) -> SpectralDataset:
     lab = load_complete_lab_rows()
-    metadata, spectra = collect_candidate_mir(lab, candidate_count=candidate_count)
+    metadata, spectra = collect_candidate_mir(lab, candidate_count=candidate_count, chunk_size=4096)
     priorities = np.asarray(
         [
             stable_priority(str(row[JOIN_COLUMNS[0]]), str(row[JOIN_COLUMNS[1]]))
@@ -185,6 +185,23 @@ def prepare_dataset(project_root: Path, candidate_count: int = 2400) -> Spectral
         "targets": [target.to_dict() for target in DEFAULT_TARGETS],
     }
     (output_dir / "manifest.json").write_text(json.dumps(manifest, indent=2), encoding="utf-8")
+    return dataset
+
+
+def prepare_transfer_source(project_root: Path, *, pool_size: int = 10000, candidate_count: int = 25000) -> SpectralDataset:
+    """Create a larger deterministic OSSL source pool for fold-local transfer selection."""
+    if candidate_count < pool_size:
+        raise ValueError("candidate_count harus setidaknya sebesar pool_size.")
+    lab = load_complete_lab_rows()
+    metadata, spectra = collect_candidate_mir(lab, candidate_count=candidate_count)
+    order = diversity_order(metadata, spectra, max_samples=pool_size)
+    metadata, spectra = metadata.iloc[order].reset_index(drop=True), spectra[order]
+    metadata.insert(0, "sample_order", np.arange(1, len(metadata) + 1))
+    metadata.insert(1, "sample_id", metadata[JOIN_COLUMNS[1]])
+    dataset = SpectralDataset(metadata, spectra, MIR_GRID.copy())
+    output = project_root / "data" / "ossl_transfer"
+    save_processed_dataset(dataset, output)
+    (output / "manifest.json").write_text(json.dumps({"purpose": "deterministic OSSL source pool for per-fold local spectral nearest-neighbor selection", "pool_size": pool_size, "candidate_count": candidate_count, "targets": [target.to_dict() for target in DEFAULT_TARGETS]}, indent=2), encoding="utf-8")
     return dataset
 
 

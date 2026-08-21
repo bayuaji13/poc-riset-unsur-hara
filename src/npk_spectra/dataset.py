@@ -52,7 +52,11 @@ def save_processed_dataset(dataset: SpectralDataset, output_dir: Path) -> None:
 
 
 def load_processed_dataset(project_root: Path | str) -> SpectralDataset:
-    root = Path(project_root) / "data" / "processed"
+    return load_dataset_directory(Path(project_root) / "data" / "processed")
+
+
+def load_dataset_directory(root: Path | str) -> SpectralDataset:
+    root = Path(root)
     metadata_path = root / "metadata.csv"
     spectra_path = root / "spectra.npz"
     if not metadata_path.exists() or not spectra_path.exists():
@@ -63,4 +67,3 @@ def load_processed_dataset(project_root: Path | str) -> SpectralDataset:
         spectra=arrays["spectra"].astype(float),
         grid=arrays["grid"].astype(float),
     )
-

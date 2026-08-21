@@ -37,6 +37,7 @@ PAGES = (
     "Eksplorasi NPK",
     "Learning curve",
     "Prediksi & residual",
+    "Transfer Lokal",
     "Metodologi",
 )
 
@@ -332,6 +333,29 @@ def page_predictions() -> None:
     st.dataframe(metrics[(metrics["target"] == target_code) & (metrics["budget"] == budget)], hide_index=True, width="stretch")
 
 
+def page_transfer() -> None:
+    section("Transfer OSSL → Lokal", "Leave-one-county-out untuk local-first, OSSL zero-shot, dan head-only fine-tuning.")
+    root = PROJECT_ROOT / "artifacts"
+    paths = [root / "transfer_predictions.csv", root / "transfer_fold_metrics.csv", root / "transfer_summary.csv"]
+    if not all(path.exists() for path in paths):
+        st.error("Hasil transfer belum tersedia. Jalankan `python scripts/run_transfer_benchmark.py`.")
+        return
+    predictions, metrics, summary = (pd.read_csv(path) for path in paths)
+    target = st.radio("Target", [item.code for item in DEFAULT_TARGETS], horizontal=True, key="transfer_target")
+    st.dataframe(summary[summary["target"] == target].sort_values("rmse_median"), hide_index=True, width="stretch")
+    view = predictions[predictions["target"] == target]
+    figure = px.scatter(view, x="observed", y="predicted", color="variant", symbol="held_out_county", hover_name="sample_id")
+    bounds = [min(view.observed.min(), view.predicted.min()), max(view.observed.max(), view.predicted.max())]
+    figure.add_trace(go.Scatter(x=bounds, y=bounds, mode="lines", line={"dash": "dash", "color": "#526562"}, name="1:1"))
+    st.plotly_chart(figure, width="stretch")
+    workbook = root / "NPK_Filled_Soil_Data_v2_with_transfer_results.xlsx"
+    if workbook.exists():
+        st.download_button("Download workbook hasil transfer", workbook.read_bytes(), file_name=workbook.name, mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")
+    else:
+        st.caption("Workbook hasil akan tersedia setelah `python scripts/export_transfer_workbook.py` dijalankan.")
+    st.warning("P dan K memakai kecocokan metode OSSL provisional karena SOP laboratorium lokal belum diketahui.")
+
+
 def page_methodology() -> None:
     section("Metodologi", "Batas interpretasi ditampilkan bersama hasil, bukan disembunyikan di catatan kaki.")
     st.markdown(
@@ -392,5 +416,7 @@ else:
         page_targets(dataset)
     elif page == "Learning curve":
         page_learning_curve()
+    elif page == "Transfer Lokal":
+        page_transfer()
     else:
         page_predictions()

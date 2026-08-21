@@ -7,6 +7,7 @@ __pycache__/
 !.streamlit/config.toml
 data/raw/
 data/cache/
+data/ossl_transfer/
 artifacts/*.joblib
 artifacts/*.pt
 .DS_Store
